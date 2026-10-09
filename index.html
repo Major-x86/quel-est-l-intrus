@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quel est l'intrus ? 100 tests de logique</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5fb;--card:#fff;--ink:#14213d;--mut:#5b6785;--ac:#2b3fd6;--ok:#12805c;--ko:#c0392b;--ln:#d8def0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e1424;--card:#172038;--ink:#eef1fb;--mut:#9aa7c7;--ac:#8ea0ff;--ok:#43c59e;--ko:#ff7a6b;--ln:#2a3556}}
+:root[data-theme=dark]{--bg:#0e1424;--card:#172038;--ink:#eef1fb;--mut:#9aa7c7;--ac:#8ea0ff;--ok:#43c59e;--ko:#ff7a6b;--ln:#2a3556}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;text-size-adjust:100%;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}button{touch-action:manipulation;font-family:inherit;min-height:40px}body{overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;max-width:820px;margin:0 auto;padding:14px 18px}
+.brand{background:none;border:0;color:var(--ink);font:800 20px Sora,sans-serif;cursor:pointer;padding:0}
+nav{display:flex;gap:10px;align-items:center}
+main{max-width:820px;margin:0 auto;padding:6px 18px 60px}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;margin:0}
+.hero{background:linear-gradient(135deg,#1c2a9c,#2b3fd6 55%,#5b6cf0);color:#fff;border-radius:24px;padding:34px 24px}
+.hero h1{font-size:clamp(28px,6vw,44px);font-weight:800;letter-spacing:-.02em}
+.hero p{max-width:540px;opacity:.92;margin:10px 0 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.st{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:12px;text-align:center}
+.st b{font:800 22px Sora,sans-serif;color:var(--ac);display:block}.st span{font-size:12px;color:var(--mut)}
+h2{font-size:20px;margin:26px 0 12px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.pillb{border:1px solid var(--ln);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 16px;cursor:pointer;font:500 14px Inter,sans-serif}
+.pillb.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.s{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:16px;margin-bottom:10px}
+.sn{flex:none;width:46px;height:46px;border-radius:14px;background:var(--ac);color:#fff;display:grid;place-items:center;font:800 20px Sora,sans-serif}
+.si{flex:1;min-width:0}.si b{font-family:Sora,sans-serif;display:block}.si span{color:var(--mut);font-size:14px}
+.sa{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.bar,.cd{height:6px;background:var(--ln);border-radius:9px;margin:8px 0 0;overflow:hidden}.bar i,.cd i{display:block;height:100%;background:var(--ac);transition:width .3s}
+.cd i{transition:width 1s linear}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:10px 16px;font:600 14px Sora,sans-serif;cursor:pointer}
+.btn.g{background:transparent;color:var(--ink);border:1px solid var(--ln)}.btn:disabled{opacity:.4;cursor:default}
+.pill{background:var(--card);border:1px solid var(--ln);border-radius:99px;padding:5px 12px;font:600 14px Sora,sans-serif}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stp{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:16px;font-size:14px}.stp b{font-family:Sora,sans-serif;display:block;margin-bottom:4px;color:var(--ac)}
+.top{display:flex;justify-content:space-between;color:var(--mut);font-size:14px;margin-bottom:10px}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.dt{width:30px;height:30px;border-radius:9px;border:1px solid var(--ln);background:var(--card);color:var(--mut);font:600 12px Sora,sans-serif;cursor:pointer}
+.dt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.dt.ko{background:var(--ko);color:#fff;border-color:var(--ko)}.dt.cur{outline:2px solid var(--ac);outline-offset:1px}
+.q{background:var(--card);border:1px solid var(--ln);border-radius:22px;padding:24px 14px;text-align:center}
+.q h3{font-size:26px;color:var(--ac)}
+.opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:20px 0 8px}
+.o{background:#fff;border:3px solid var(--ln);border-radius:12px;padding:3px 3px 5px;cursor:pointer;color:#14213d;font:700 15px Sora,sans-serif}
+.o{min-height:0}.o svg{width:100%;height:auto;display:block}@media(hover:hover){.o:hover:not(:disabled){border-color:var(--ac)}}
+.o.ok{border-color:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 30%,transparent)}.o.ko{border-color:var(--ko)}.o.off{opacity:.25}
+.fb{margin-top:12px;text-align:left;background:var(--bg);border-radius:14px;padding:12px 16px;font-size:15px}
+.act{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.big{font:800 60px Sora,sans-serif;color:var(--ac)}
+.rv{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:16px;text-align:left}
+.rv button{background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;color:var(--ink);font:13px Inter,sans-serif;cursor:pointer}
+.note{font-size:13px;color:var(--mut);margin-top:26px}
+@media(min-width:900px){header,main{max-width:1000px}.hero{padding:48px 40px}.q{padding:36px 32px}.opts{gap:16px;margin:28px 0 12px}.o{font-size:18px;border-radius:16px}.dt{width:36px;height:36px;font-size:14px}.steps{gap:16px}.big{font-size:72px}}
+@media(max-width:560px){header{padding:10px 14px}main{padding:4px 14px 48px}.brand{font-size:18px}nav{gap:6px}nav .btn{padding:8px 12px;font-size:13px}.hero{padding:24px 18px;border-radius:20px}.stats{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}.s{flex-wrap:wrap}.sa{justify-content:flex-start;width:100%}.sa .btn{flex:1;min-height:44px}.opts{gap:4px}.o{font-size:13px;border-width:2px;border-radius:9px}.q{padding:20px 10px;border-radius:18px}.top{flex-wrap:wrap;gap:4px}.dots{gap:4px}.dt{width:calc((100% - 19*4px)/20*1);min-width:26px;height:30px;font-size:11px}.act .btn{flex:1;min-width:130px;min-height:46px}.pillb{width:100%;text-align:center;min-height:44px}.big{font-size:48px}.rv{grid-template-columns:repeat(2,1fr)}.st b{font-size:19px}}
+@media(max-width:360px){.opts{gap:3px}.o{font-size:12px}.dt{min-width:24px}}
+</style></head><body><div id="app"></div>
+<script>
+const NAMES=["Série 1 : Les bases","Série 2 : Règles visuelles","Série 3 : Distracteurs","Série 4 : Règles croisées","Série 5 : Expert"];
+const DESC=["Une seule différence, tout le reste est identique","Six règles possibles, détails fixes","Couleurs et détails qui varient","Un lien entre triangles et côtés s'ajoute","Plus d'éléments, couleurs et règles liées"];
+const LAB={n:"le nombre de petits triangles",s:"le nombre de côtés de la forme centrale",t:"le remplissage des triangles",f:"le remplissage de la forme centrale",d:"la présence d'un point au centre de la forme",o:"le sens des triangles (vers le centre ou vers l'extérieur)",e:"le lien entre le nombre de triangles et le nombre de côtés"};
+const COL=["#2b3fd6","#0f9d8a","#d9731a"],LIM=40,K="intrus-v2";
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const memo={};const gq=i=>memo[i]||(memo[i]=build(i));
+function build(i){
+ const r=rng(1000+i*7919),ri=(a,b)=>a+Math.floor(r()*(b-a+1)),ser=Math.floor(i/20),mx=ser==4?7:6;
+ const pool=ser==0?["n","s"]:ser<3?["n","s","t","f","d","o"]:["n","s","t","f","d","o","e"];
+ const rule=pool[ri(0,pool.length-1)],free=ser>=2;
+ const rc=()=>({n:ri(2,mx),s:ri(3,7),t:r()<.5,f:r()<.5,d:r()<.5,o:r()<.5,c:free?ri(0,ser>=3?2:1):0});
+ const P={n:c=>c.n,s:c=>c.s,t:c=>c.t,f:c=>c.f,d:c=>c.d,o:c=>c.o,c:c=>c.c,e:c=>c.n==c.s};
+ for(let z=0;z<3000;z++){
+  const b=rc(),cards=[];for(let k=0;k<5;k++)cards.push(free?rc():{...b});
+  const odd=ri(0,4);
+  if(rule=="e"){cards.forEach((c,k)=>{if(k==odd){do{c.n=ri(2,mx);c.s=ri(3,7)}while(c.n==c.s)}else c.n=c.s=ri(3,mx)})}
+  else if(rule=="n"||rule=="s"){const m=rule=="n"?[2,mx]:[3,7],v=ri(m[0],m[1]);let w;do{w=ri(m[0],m[1])}while(w==v);cards.forEach((c,k)=>c[rule]=k==odd?w:v)}
+  else{const v=r()<.5;cards.forEach((c,k)=>c[rule]=k==odd?!v:v)}
+  const hits=Object.keys(P).filter(p=>{const cnt={};cards.map(P[p]).forEach(v=>cnt[v]=(cnt[v]||0)+1);return Object.values(cnt).includes(4)});
+  if(hits.length==1&&hits[0]==rule){
+   const f=cards[odd?0:1],od=cards[odd],o=[0,1,2,3,4].filter(x=>x!=odd);
+   const W={n:`Quatre figures ont ${f.n} triangles, l'intrus en a ${od.n}.`,s:`Quatre figures ont une forme centrale à ${f.s} côtés, l'intrus en a ${od.s}.`,
+   t:f.t?"Quatre figures ont des triangles pleins, l'intrus a des triangles vides.":"Quatre figures ont des triangles vides, l'intrus a des triangles pleins.",
+   f:f.f?"Quatre figures ont une forme centrale pleine, l'intrus l'a vide.":"Quatre figures ont une forme centrale vide, l'intrus l'a pleine.",
+   d:f.d?"Quatre figures ont un point au centre de la forme, l'intrus n'en a pas.":"Quatre figures n'ont pas de point au centre, l'intrus en a un.",
+   o:f.o?"Dans quatre figures les triangles pointent vers le centre, dans l'intrus ils pointent vers l'extérieur.":"Dans quatre figures les triangles pointent vers l'extérieur, dans l'intrus ils pointent vers le centre.",
+   e:"Dans quatre figures, il y a autant de triangles que de côtés à la forme centrale. Pas dans l'intrus."};
+   return{cards,odd,rule,why:W[rule],rm:[o[ri(0,1)],o[ri(2,3)]]}}
+ }
+}
+function draw(c,sd){
+ const r=rng(sd*977+13),C=COL[c.c],rot=r()*6.28,cx=50+(r()-.5)*8,cy=50+(r()-.5)*8,R=13+r()*6;
+ const pts=[];for(let k=0;k<c.s;k++){const a=rot+k*6.283/c.s+(r()-.5)*.35,rr=R*(.75+r()*.5);pts.push((cx+Math.cos(a)*rr).toFixed(1)+","+(cy+Math.sin(a)*rr).toFixed(1))}
+ let g=`<rect x="3" y="3" width="94" height="94" rx="4" fill="none" stroke="${C}" stroke-width="2.5"/><polygon points="${pts.join(" ")}" fill="${c.f?C:"none"}" stroke="${C}" stroke-width="2.2" stroke-linejoin="round"/>`;
+ if(c.d)g+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="2.6" fill="${c.f?"#fff":C}"/>`;
+ const off=r()*6.28;
+ for(let k=0;k<c.n;k++){const a=off+k*6.283/c.n+(r()-.5)*.5,d=31+r()*6,x=Math.min(88,Math.max(12,50+Math.cos(a)*d)),y=Math.min(88,Math.max(12,50+Math.sin(a)*d));
+  const h=Math.atan2(cy-y,cx-x)*57.3+90+(c.o?0:180)+(r()-.5)*30,s=.9+r()*.35;
+  g+=`<polygon transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${h.toFixed(0)}) scale(${s.toFixed(2)})" points="0,-6 5.5,4.5 -5.5,4.5" fill="${c.t?C:"none"}" stroke="${C}" stroke-width="2"/>`}
+ return`<svg viewBox="0 0 100 100">${g}</svg>`}
+const app=document.getElementById("app");
+let S={mode:"train",d:{}},st={view:"h"},T;
+try{Object.assign(S,JSON.parse(localStorage.getItem(K)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const fm=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0"),fp=x=>String(x).replace(".",",");
+const pts=(x,k,j)=>x&&x.c==gq(k*20+j).odd?[1,.5,.25][x.h]:0;
+function shell(inner,q){app.innerHTML=`<header><button class="brand" onclick="home()">🧩 Intrus</button><nav>${q?`<span class="pill" id="clk">⏱ ${fm(S.d[st.k].sec)}</span>`:""}<button class="btn g" onclick="home()">${q?"Accueil":"Toutes les séries"}</button></nav></header><main>${inner}</main>`}
+function home(){
+ clearInterval(T);st.view="h";let tot=0,ok=0,fin=0,p=0;
+ for(const k in S.d){const D=S.d[k];D.a.forEach((x,j)=>{if(x){tot++;if(x.c==gq(k*20+j).odd)ok++;p+=pts(x,k,j)}});if(D.a.every(Boolean))fin++}
+ const cards=NAMES.map((n,k)=>{const D=S.d[k],c=D?D.a.filter(Boolean).length:0,sc=D?D.a.reduce((s,x,j)=>s+pts(x,k,j),0):0;
+  const b=c==0?`<button class="btn" onclick="openS(${k})">Commencer</button>`:c<20?`<button class="btn" onclick="openS(${k})">Reprendre</button><button class="btn g" onclick="openS(${k},1)">Recommencer</button>`:`<button class="btn" onclick="st.k=${k};res()">Bilan</button><button class="btn g" onclick="openS(${k},1)">Refaire</button>`;
+  return`<div class="s"><div class="sn">${k+1}</div><div class="si"><b>${n}</b><span>${DESC[k]}</span><div class="bar"><i style="width:${c*5}%"></i></div><span>${c}/20 répondues${c?` · ${fp(sc)} pts`:""}</span></div><div class="sa">${b}</div></div>`}).join("");
+ shell(`<div class="hero"><h1>Quel est l'intrus ?</h1><p>100 exercices de logique visuelle en 5 séries. Quatre figures suivent la même règle, une seule y échappe. À toi de la trouver.</p></div>
+ <div class="stats"><div class="st"><b>${tot}</b><span>questions faites</span></div><div class="st"><b>${tot?Math.round(ok/tot*100):0}%</b><span>de réussite</span></div><div class="st"><b>${fin}/5</b><span>séries terminées</span></div><div class="st"><b>${fp(p)}</b><span>points</span></div></div>
+ <h2>Choisis ton mode</h2><div class="seg"><button class="pillb ${S.mode=="train"?"on":""}" onclick="S.mode='train';save();home()">Entraînement, sans limite de temps</button><button class="pillb ${S.mode=="chrono"?"on":""}" onclick="S.mode='chrono';save();home()">Chrono, ${LIM} s par question</button></div>
+ <h2>Choisis une série</h2>${cards}
+ <h2>Comment ça marche</h2><div class="steps"><div class="stp"><b>1. Observe</b>Compare le nombre de triangles, la forme centrale, les remplissages, le sens des pointes.</div><div class="stp"><b>2. Élimine</b>Cherche ce que quatre figures ont en commun, puis repère celle qui diffère.</div><div class="stp"><b>3. Vérifie</b>Un indice coûte des points : 1 point sans indice, 0,5 avec un, 0,25 avec deux.</div></div>
+ <p class="note">Raccourcis clavier : touches 1 à 5 pour répondre, H pour un indice, flèches pour naviguer. Ces exercices servent à t'entraîner, ils ne mesurent pas un QI. <a href="#" onclick="if(confirm('Effacer toute ta progression ?')){S.d={};save();home()}return false" style="color:var(--mut)">Effacer ma progression</a></p>`)}
+function openS(k,reset){st.k=k;if(reset||!S.d[k])S.d[k]={a:Array(20).fill(null),cur:0,sec:0};const D=S.d[k];let i=D.a.findIndex(x=>!x);go(i<0?0:i)}
+function go(i){const D=S.d[st.k];D.cur=i;st.i=i;st.Q=gq(st.k*20+i);const a=D.a[i];st.h=a?a.h:0;st.t=0;st.view="q";render();clearInterval(T);T=setInterval(tick,1000)}
+function tick(){if(st.view!="q"||document.hidden)return;const D=S.d[st.k];if(D.a[st.i])return;D.sec++;st.t++;const c=document.getElementById("clk");if(c)c.textContent="⏱ "+fm(D.sec);
+ if(S.mode=="chrono"){const b=document.getElementById("cd");if(b)b.style.width=Math.max(0,(LIM-st.t)/LIM*100)+"%";if(st.t>=LIM)pick(-1)}}
+function render(){
+ const k=st.k,D=S.d[k],a=D.a[st.i],Q=st.Q,left=D.a.filter(Boolean).length;
+ const dots=D.a.map((x,j)=>`<button class="dt ${j==st.i?"cur ":""}${x?(x.c==gq(k*20+j).odd?"ok":"ko"):""}" onclick="go(${j})">${j+1}</button>`).join("");
+ const opts=Q.cards.map((c,j)=>`<button class="o${a?(j==Q.odd?" ok":j==a.c?" ko":""):""}${!a&&st.h>=2&&Q.rm.includes(j)?" off":""}" onclick="pick(${j})" ${a||(st.h>=2&&Q.rm.includes(j))?"disabled":""}>${draw(c,k*100+st.i*5+j)}${j+1}</button>`).join("");
+ const hints=(st.h>=1?`<div class="fb">💡 Indice 1 : regarde ${LAB[Q.rule]}.</div>`:"")+(st.h>=2?`<div class="fb">💡 Indice 2 : deux mauvaises réponses sont écartées.</div>`:"");
+ const fb=a?`<div class="fb"><b style="color:var(--${a.c==Q.odd?"ok":"ko"})">${a.c==-1?"Temps écoulé.":a.c==Q.odd?"Bonne réponse, +"+fp(pts(a,k,st.i))+" pt.":"Raté."}</b> L'intrus est la figure ${Q.odd+1}. ${Q.why}</div>`:"";
+ const act=a?`<button class="btn" onclick="nextQ()">${left==20?"Voir le bilan":"Question suivante"}</button>`:`<button class="btn g" onclick="hint()" ${st.h>=2?"disabled":""}>💡 Indice (${st.h}/2)</button><button class="btn g" onclick="skip()">Passer</button>`;
+ shell(`<div class="top"><span>${NAMES[k]}</span><span>Question ${st.i+1} / 20 · ${S.mode=="chrono"?"Chrono":"Entraînement"}</span></div><div class="dots">${dots}</div>
+ <div class="q"><h3>LOGIQUE</h3><p style="margin:4px 0 0">Quel est l'intrus ?</p>${S.mode=="chrono"&&!a?`<div class="cd"><i id="cd" style="width:${(LIM-st.t)/LIM*100}%"></i></div>`:""}<div class="opts">${opts}</div>${hints}${fb}<div class="act">${act}</div></div>`,1)}
+function pick(c){const D=S.d[st.k];if(D.a[st.i])return;D.a[st.i]={c,h:st.h,t:st.t};save();render()}
+function hint(){if(!S.d[st.k].a[st.i]&&st.h<2){st.h++;render()}}
+function skip(){const D=S.d[st.k];for(let n=1;n<20;n++){const j=(st.i+n)%20;if(!D.a[j])return go(j)}}
+function nextQ(){const D=S.d[st.k];for(let n=1;n<=20;n++){const j=(st.i+n)%20;if(!D.a[j])return go(j)}res()}
+function res(){
+ clearInterval(T);st.view="r";const k=st.k,D=S.d[k],L=D.a;if(!L.every(Boolean)){return home()}
+ const ok=L.filter((x,j)=>x.c==gq(k*20+j).odd).length,pt=L.reduce((s,x,j)=>s+pts(x,k,j),0),hs=L.reduce((s,x)=>s+x.h,0);
+ const m=ok>=17?"Excellent niveau, tu peux passer à la série suivante.":ok>=12?"Bon résultat. Relis les corrections de tes erreurs.":"Continue, la régularité fait progresser vite. Utilise les indices sans hésiter.";
+ shell(`<div class="q"><p style="color:var(--mut);margin:0">${NAMES[k]}</p><div class="big">${ok}/20</div><p>${m}</p>
+ <div class="stats"><div class="st"><b>${fp(pt)}</b><span>points</span></div><div class="st"><b>${fm(D.sec)}</b><span>temps de réflexion</span></div><div class="st"><b>${hs}</b><span>indices utilisés</span></div><div class="st"><b>${Math.round(D.sec/20)} s</b><span>par question</span></div></div>
+ <div class="rv">${L.map((x,j)=>`<button onclick="go(${j})">${x.c==gq(k*20+j).odd?"✅":"❌"} Question ${j+1}</button>`).join("")}</div>
+ <div class="act"><button class="btn g" onclick="openS(${k},1)">Refaire la série</button>${k<4?`<button class="btn" onclick="openS(${k+1})">Série suivante</button>`:""}<button class="btn g" onclick="home()">Toutes les séries</button></div></div>`)}
+document.addEventListener("keydown",e=>{if(st.view!="q")return;const a=S.d[st.k].a[st.i];
+ if("12345".includes(e.key)&&e.key)pick(+e.key-1);else if(e.key=="h"||e.key=="H")hint();
+ else if((e.key=="ArrowRight"||e.key=="Enter")&&a)nextQ();else if(e.key=="ArrowRight")skip();else if(e.key=="ArrowLeft"&&st.i>0)go(st.i-1)});
+home();
+</script></body></html>
